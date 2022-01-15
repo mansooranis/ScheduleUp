@@ -1,0 +1,17 @@
+{
+  "name": "bytecrunchers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "armaankatyal",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.0",
+    "nodemon": "^2.0.15"
+  }
+}
