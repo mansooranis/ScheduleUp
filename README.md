@@ -1,4 +1,8 @@
 # ScheduleUp - ByteCrunchers
+
+![schedule_up](https://user-images.githubusercontent.com/93630550/149675772-6a9caac7-ca47-47f6-a72f-665bc8c1c3a9.gif)
+
+
 ## Inspiration
 Choosing the correct university courses is an important component of achieving success in life. Only the ability to take those classes at one's own speed and leisure is more significant. We built Schedule-Up as a convenience to confront improbable last-minute course adjustments due to unavailability, uncertainty, and schedule conflicts.
 
