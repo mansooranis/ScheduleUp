@@ -25,3 +25,8 @@ We learned how to make the most out of everyone's strengths and weaknesses to su
 
 ## What's next for ScheduleUp?
 We intend to containerize the backend on docker so that it can be quickly expanded utilising DevOps on Google Cloud Platform, and we're always working on adding more courses and lecture times from different universities.
+
+## Package Managers
+#### NPM  
+[![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)]()
+[![NPM License](https://img.shields.io/npm/l/all-contributors.svg?style=flat)](https://github.com/tterb/hyde/blob/master/LICENSE)
