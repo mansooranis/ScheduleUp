@@ -7,7 +7,7 @@ https://bytecrunchers.uw.r.appspot.com/
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install npm.
+Use the package manager [npm](https://www.npmjs.com/) to run the project.
 
 ```bash
 npm start
