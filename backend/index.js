@@ -1,12 +1,14 @@
 const { MongoClient } = require("mongodb");
 const express = require('express');
 const app = express();
+var cors = require('cors');
+
 
 // creating a new connection client to the database
 const client = new MongoClient("mongodb://localhost:27017", { useNewUrlParser: true });
 // using middleware to parse the body of the request
+app.use(cors());
 app.use(express.json());
-
 // This sends data of all the courses to the frontend
 app.get('/alldata', (req, res) => {
     // create a connection
@@ -38,12 +40,12 @@ function combinate(obj) {
   // array to store all the startTimes
   const startTime = [];
   for (var key in obj) {
-    const values = obj[key];
-    const all = [];
-    for (let i = 0; i < values.length; i++) {
-        // adding the startTime to the array
-        startTime.push(values[i].startTime);
-        for (let j = 0; j < (combos.length || 1); j++) {
+      const values = obj[key];
+      const all = [];
+      for (let i = 0; i < values.length; i++) {
+          // adding the startTime to the array
+          startTime.push(values[i].startTime);
+          for (let j = 0; j < (combos.length || 1); j++) {
             // if the startTime of previous course is same as the new course startTime then skip the case
             if(startTime.indexOf(values[i].startTime) !== startTime.lastIndexOf(values[i].startTime)) {
                 continue;
@@ -51,7 +53,7 @@ function combinate(obj) {
             else{
                 // Making a new array to store the combination of the courses
             const newCombo = Object.assign(Object.assign({}, combos[j]), {
-            [key]: values[i],
+                [key]: values[i]
             });
             // pushing the new combination to the array
             all.push(newCombo);
@@ -98,4 +100,4 @@ app.post("/getCourseData", (req, res) => {
     });
 });
 // listen to the port
-app.listen(3000, () => console.log('App listening on port 3000!'))
+app.listen(5000, () => console.log('App listening on port 3000!'))
