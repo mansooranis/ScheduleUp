@@ -1,33 +1,6 @@
 import React from 'react';
 import '../TimeTable/timetable.css';
 
-const week = {
-    monday : {
-        course1 : {
-            startTime : 9,
-            endTime : 11,
-        },
-        course2 : {
-            startTime : 11,
-            endTime : 12,
-        },
-    },
-    tuesday : {
-        course1 : {
-            startTime : 9,
-            endTime : 10,
-        },
-        course2 : {
-            startTime : 11,
-            endTime : 12,
-        },
-        course3 : {
-            startTime : 14,
-            endTime : 15,
-        }
-    }
-}
-
 
 export default function GetTimeTable(prop) {
 
@@ -47,14 +20,21 @@ export default function GetTimeTable(prop) {
                         rowData.push(
                             <td>null</td>
                         )
+                        
                     }
                     else{
+                        const duration = param[key][j].endTime - param[key][j].startTime
                         rowData.push(
-                            <td colSpan={param[key][j].endTime - param[key][j].startTime}>
+                            <td colSpan={duration}>
                                 {j}
                             </td>
                         )
+                        if (duration > 1){
+                            i = i + (duration-1)
+                        } 
+                        
                     }
+                    break;
                 }
             }
             data.push(rowData)
@@ -111,21 +91,29 @@ export default function GetTimeTable(prop) {
                     <th>
                         Tuesday
                     </th>
+
+                    {getRowData()[1]}
                 </tr>
                 <tr>
                     <th>
                         Wednesday
                     </th>
+
+                    {getRowData()[2]}
                 </tr>
                 <tr>
                     <th>
                         Thursday
                     </th>
+
+                    {getRowData()[3]}
                 </tr>
                 <tr>
                     <th>
                         Friday
                     </th>
+
+                    {getRowData()[4]}
                 </tr>
 
             </table>
