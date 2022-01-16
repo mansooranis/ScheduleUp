@@ -1,9 +1,7 @@
-import React, { Component, useEffect } from 'react';
+import React from 'react';
 import '../TimeTable/timetable.css';
 
-
-
-const day = {
+const week = {
     monday : {
         course1 : {
             startTime : 9,
@@ -24,25 +22,46 @@ const day = {
             endTime : 12,
         },
         course3 : {
-            startTime : 2,
-            endTime : 3,
+            startTime : 14,
+            endTime : 15,
         }
     }
 }
 
-export default function GetTimeTable() {
 
-    const getRowData = (day) => {
-        let rowData = [];
-        for (const key in day) {
-            rowData.push(
-                <td colSpan={day.key.endTime - day.key.startTime}>
-                    {key}
-                </td>
-            );
+export default function GetTimeTable(prop) {
+
+    const getRowData = () => {
+        let data = [];
+        const param = prop.prop;
+
+        // key : days
+        for (let key in param){
+            let rowData = []
+
+            for (let i=8; i<21; i++){
+
+                // j : courses
+                for (let j in param[key]){
+                    if (param[key][j].startTime !== i) {
+                        rowData.push(
+                            <td>null</td>
+                        )
+                    }
+                    else{
+                        rowData.push(
+                            <td colSpan={param[key][j].endTime - param[key][j].startTime}>
+                                {j}
+                            </td>
+                        )
+                    }
+                }
+            }
+            data.push(rowData)
         }
-        return rowData;
-    }
+        console.log(data)
+        return data;
+    }   
         
     return (
         <div>
@@ -62,21 +81,21 @@ export default function GetTimeTable() {
 
                     <th>12</th>
 
-                    <th>1</th>
+                    <th>13</th>
 
-                    <th>2</th>
+                    <th>14</th>
 
-                    <th>3</th>
+                    <th>15</th>
 
-                    <th>4</th>
+                    <th>16</th>
 
-                    <th>5</th>
+                    <th>17</th>
 
-                    <th>6</th>
+                    <th>18</th>
 
-                    <th>7</th>
+                    <th>19</th>
 
-                    <th>8</th>
+                    <th>20</th>
                 </tr>
 
 
@@ -85,10 +104,8 @@ export default function GetTimeTable() {
                         Monday
                     </th>
 
-                    <td colSpan={day.monday.course1.endTime - day.monday.course1.startTime}>
-                        course1
-                    </td>
-                    
+                    {getRowData()[0]}
+
                 </tr>
                 <tr>
                     <th>
