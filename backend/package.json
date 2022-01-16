@@ -9,8 +9,11 @@
   "author": "armaankatyal",
   "license": "ISC",
   "dependencies": {
+    "allcombinations": "^1.1.5",
     "body-parser": "^1.19.1",
+    "combinate": "^1.1.7",
     "express": "^4.17.2",
+    "generatorics": "^1.1.0",
     "mongodb": "^4.3.0",
     "nodemon": "^2.0.15"
   }
