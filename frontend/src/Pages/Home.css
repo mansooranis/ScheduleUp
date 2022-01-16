@@ -27,17 +27,20 @@
 .toast-i1{
     position: absolute;
     left: 100px;
-    top: 250px;
+    top: 350px;
+    transform: rotate(-15deg);
 }
 .toast-i2{
     position: absolute;
     left: 200px;
     top: 80px;
+    transform: rotate(20deg);
 }
 .toast-i3{
     position: absolute;
-    left: 1000px;
+    left: 950px;
     top: 420px;
+    transform: rotate(10deg);
 }
 
 .toast-body-text{
@@ -71,6 +74,7 @@
     align-items: center;
     justify-content: center;
     flex-flow: column;
+    
 }
 .choice-holder{
 
@@ -78,4 +82,27 @@
 
 .array-list{
     margin:40px;
+    
+}
+
+.course-icon{
+    display: flex;
+    flex-flow: row;
+    margin: 10px;
+    gap: 13px;
+    justify-content: center;
+}
+.time-table-holder{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.subject-heading{
+    display: flex;
+    flex-flow: column;
+}
+
+.fa-calendar-check{
+    margin-right: 10px;
+    transform: rotate(20deg);
 }
