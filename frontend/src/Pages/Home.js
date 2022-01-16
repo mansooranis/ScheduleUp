@@ -4,7 +4,7 @@ import { Link} from 'react-scroll'
 import { useState } from "react";
 import ListSubs from "./List";
 import { BallTriangle } from "react-loader-spinner";
-const axios = require('axios').default;
+import axios from "axios";
 const url = "https://bytecrunchers.uw.r.appspot.com/"
 
 function SubjectIcon(props){
