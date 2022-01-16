@@ -3,53 +3,9 @@ import { Toast, InputGroup, FormControl, Button, Alert} from "react-bootstrap";
 import { Link} from 'react-scroll'
 import { useState } from "react";
 import ListSubs from "./List";
+import { BallTriangle } from "react-loader-spinner";
 const axios = require('axios').default;
-const url = "http://a1d5-74-3-183-254.ngrok.io/"
-
-
-const data = {
-    "0": {
-      "LecutreID": 76442,
-      "CourseName": "ENGL 103",
-      "LectureName": "Lecture 850",
-      "Days": "MWF",
-      "startTime": 10,
-      "endTime": 11
-    },
-    "1": {
-      "LecutreID": 73444,
-      "CourseName": "ECON 101",
-      "LectureName": "LECTURE B1",
-      "Days": "MWF",
-      "startTime": 11,
-      "endTime": 12
-    },
-    "2": {
-      "LecutreID": 60434,
-      "CourseName": "MATH 154",
-      "LectureName": "LECTURE Q1",
-      "Days": "MWF",
-      "startTime": 14,
-      "endTime": 15
-    },
-    "3": {
-      "LectureID": 73716,
-      "CourseName": "SOC 100",
-      "LectureName": "LECTURE B3",
-      "Days": "TT",
-      "startTime": 16,
-      "endTime": 18
-    },
-    "4": {
-      "LecutreID": 72444,
-      "CourseName": "CMPUT 175",
-      "LectureName": "Lecture B1",
-      "Days": "MWF",
-      "startTime": 9,
-      "endTime": 10
-    }
-  }
-
+const url = "https://bytecrunchers.uw.r.appspot.com/"
 
 function SubjectIcon(props){
     return(
@@ -59,13 +15,10 @@ function SubjectIcon(props){
     )
 }
 
-const HoldData = (props) => {
-    return(
-        <div>{props.data}</div>
-    )
-}
-
 export default function Home(){
+
+    //loader
+    const [loading, setLoading] = useState(false)
 
     // api data state
     const [apidata, setApidata] = useState([])
@@ -94,7 +47,9 @@ export default function Home(){
             console.log(arr)
             setSublist(sublist.concat({id:subid,"course": subject}))
             //finallist.push(subject)
-            axios.post(`${url}getCourseData`,{"courses" : arr}).then(function (response){setApidata(response.data)})
+            setLoading(true)
+            await axios.post(`${url}getCourseData`,{"courses" : arr}).then(function (response){setApidata(response.data)})
+            setLoading(false)
             console.log(apidata)
             setAlert(false)
             setSubject("")
@@ -124,31 +79,31 @@ export default function Home(){
                         <div className="toast-i1">
                             <Toast>
                                 <Toast.Header>
-                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                <i class="fas fa-calendar-check"/>
                                     <strong className="me-auto">Byte-Crunchers</strong>
                                     <small>{today.getHours() + ':' + today.getMinutes()}</small>
                                 </Toast.Header>
-                                <Toast.Body className="toast-body-text">Hello, world! This is a toast message.</Toast.Body>
+                                <Toast.Body className="toast-body-text">Search your class and keep adding them for more schedule options</Toast.Body>
                             </Toast>
                         </div>
                         <div className="toast-i2">
                             <Toast>
                                 <Toast.Header>
-                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                    <i class="fas fa-calendar-check"/>
                                     <strong className="me-auto">Byte-Crunchers</strong>
                                     <small>{today.getHours() + ':' + today.getMinutes()}</small>
                                 </Toast.Header>
-                                <Toast.Body className="toast-body-text">Hello, world! This is a toast message.</Toast.Body>
+                                <Toast.Body className="toast-body-text">We generate all possible combinations and avoid any clashes!</Toast.Body>
                             </Toast>
                         </div>
                         <div className="toast-i3">
                             <Toast>
                                 <Toast.Header>
-                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                <i class="fas fa-calendar-check"/>
                                     <strong className="me-auto">Byte-Crunchers</strong>
                                     <small>{today.getHours() + ':' + today.getMinutes()}</small>
                                 </Toast.Header>
-                                <Toast.Body className="toast-body-text">Hello, world! This is a toast message.</Toast.Body>
+                                <Toast.Body className="toast-body-text">Looking forward to expand!!</Toast.Body>
                             </Toast>
                         </div>
                     </div>
@@ -169,16 +124,18 @@ export default function Home(){
             <div className="main">
                 <div name = "main">
                     {alert && <Alert variant="danger">Invalid Subject! Please choose from the following: <br/>[STAT 151, ECON 101, MATH 154, SOC 101, ENGL 103, CMPUT 175]<br/>Please ensure the format as SUBJ XXX.</Alert>}
-                    <br/>
-                    
+                    {loading && <BallTriangle type="BallTriangle" color="#00BFFF" height={80} width={80}/>}
+                        <div className="course-icon">
+                        <div className="subject-heading">{issubs && <h4><br/>SUBJECTS CHOOSEN</h4>}</div>
                         {issubs && sublist.map((course,key) => 
-                        <div className = "sub-list"><SubjectIcon course = {course.course} key={key}/> 
-                       
+                        <div className = "sub-list"><br/><SubjectIcon course = {course.course} key={key}/> 
+                      
                         </div>
-                        )} 
-                    {showtables && apidata.map((data, key) => <div className="array-list"><h4>TimeTable {key+1}</h4><ListSubs data = {data}/> </div>)}
+                        )} </div>
+                        <div className="time-table-holder">
+                    {showtables && apidata.map((data, key) => <div className="array-list"><h4>Timetable {key+1}</h4><ListSubs data = {data}/> </div>)}
+                    </div>
                 </div>
-                
             </div>
         </div>
     )
