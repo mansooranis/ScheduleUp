@@ -66,3 +66,16 @@
     justify-content: center;
     flex-direction:column ;
 }
+.sub-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.choice-holder{
+
+}
+
+.array-list{
+    margin:40px;
+}
