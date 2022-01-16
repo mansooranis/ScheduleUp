@@ -2,22 +2,49 @@ import "./Home.css";
 import { Toast, InputGroup, FormControl, Button, Alert} from "react-bootstrap";
 import { Link} from 'react-scroll'
 import { useState } from "react";
+
+
+function SubjectIcon(props){
+    return(
+        <div className="subjicon">
+            {props.course}
+        </div>
+    )
+}
+
 export default function Home(){
+
+    // for appending in state
+    const [sublist, setSublist] = useState([])
+    const [issubs,setIssubs] = useState(false)
+    const [subid, setSubid] = useState(1)
+    // ----------------------
+
     const [subject, setSubject] = useState("")
     function handleChange(event){
         setSubject(event.target.value);
     };
     const [alert , setAlert] = useState(false);
-    const subjects = ["ECON 101", "CMPUT 175", "SOC 101", "ENGL 103", "MATH 154", "STAT 151"];
-
     const subjectSubmit = () => {
         if (subject.toString() === "STAT 151" || subject.toString() === "MATH 154" || subject.toString() === "CMPUT 175" || subject.toString() === "SOC 100" || subject.toString() === "ECON 101" || subject.toString() === "ENGL 103" ){
             console.log(subject)
+            setSubid(subid+1)
+            console.log(subid)
+            setSublist(sublist.concat({id:subid,"course": subject}))
+            
             setAlert(false)
             setSubject("")
+            setIssubs(true)
+            console.log(sublist)
+            
         }else{
             setAlert(true)
             setSubject("")
+            if(subid ===0){
+                console.log();
+            }else{
+                //setSubid(subid-1)
+            }
         }
     }
     var today = new Date();
@@ -78,7 +105,15 @@ export default function Home(){
             <div className="main">
                 <div name = "main">
                     {alert && <Alert variant="danger">Invalid Subject! Please choose from the following: <br/>[STAT 151, ECON 101, MATH 154, SOC 101, ENGL 103, CMPUT 175]<br/>Please ensure the format as SUBJ XXX.</Alert>}
+                    <br/>
+                    
+                        {issubs && sublist.map((course) => 
+                        <div className = "sub-list"><SubjectIcon course = {course.course}/> 
+                       
+                        </div>
+                        )} 
                 </div>
+                
             </div>
         </div>
     )
